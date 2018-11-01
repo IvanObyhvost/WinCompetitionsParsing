@@ -126,12 +126,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\baseline_autorenew_white_18dp.png" />
-    <Resource Include="icons\baseline_clear_white_18dp.png" />
-    <Resource Include="icons\baseline_face_white_18dp.png" />
+    <Resource Include="MakeUpDb.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MakeUpDb.txt" />
+    <Resource Include="icons\autorenew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\face.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
