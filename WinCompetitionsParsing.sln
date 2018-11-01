@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinCompetitionsParsing", "WinCompetitionsParsing\WinCompetitionsParsing.csproj", "{40168443-3CD7-4679-9DD2-A7A9997484FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinCompetitionsParsing.DAL", "WinCompetitionsParsing.DAL\WinCompetitionsParsing.DAL.csproj", "{DF5B838D-F0A4-4A36-BABC-3146968C999E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinCompetitionsParsing.BL", "WinCompetitionsParsing.BL\WinCompetitionsParsing.BL.csproj", "{2CE37B1F-23E9-483C-8FD1-439DC9B70384}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{40168443-3CD7-4679-9DD2-A7A9997484FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40168443-3CD7-4679-9DD2-A7A9997484FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40168443-3CD7-4679-9DD2-A7A9997484FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF5B838D-F0A4-4A36-BABC-3146968C999E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5B838D-F0A4-4A36-BABC-3146968C999E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5B838D-F0A4-4A36-BABC-3146968C999E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5B838D-F0A4-4A36-BABC-3146968C999E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE37B1F-23E9-483C-8FD1-439DC9B70384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE37B1F-23E9-483C-8FD1-439DC9B70384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE37B1F-23E9-483C-8FD1-439DC9B70384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE37B1F-23E9-483C-8FD1-439DC9B70384}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

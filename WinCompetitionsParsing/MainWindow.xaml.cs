@@ -12,17 +12,42 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MakeUpСompetition.BLL.Services.Abstract;
+using MakeUpСompetition.pages;
 
-namespace WinCompetitionsParsing
+namespace MakeUpСompetition
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IProductService _productService;
+        public MainWindow(IProductService productService)
         {
+            _productService = productService;
             InitializeComponent();
+            frPages.NavigationService.Navigate(new MakeUpPage(_productService));
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void btClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btMakeUp_Click(object sender, RoutedEventArgs e)
+        {
+            frPages.NavigationService.Navigate(new MakeUpPage(_productService));
+        }
+
+        private void btLoadDB_Click(object sender, RoutedEventArgs e)
+        {
+            frPages.NavigationService.Navigate(new LoadDBPage(_productService));
         }
     }
 }
