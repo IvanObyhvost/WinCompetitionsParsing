@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MakeUpСompetition.BLL.Models;
-using MakeUpСompetition.BLL.Services.Abstract;
-using MakeUpСompetition.DAL.Domain;
-using MakeUpСompetition.DAL.Repositories.Abstract;
+using WinCompetitionsParsing.BL.Models;
+using WinCompetitionsParsing.BL.Services.Abstract;
+using WinCompetitionsParsing.DAL.Domain;
+using WinCompetitionsParsing.DAL.Repositories.Abstract;
 
-namespace MakeUpСompetition.BLL.Services.Implemenrtation
+namespace WinCompetitionsParsing.BL.Services.Implemenrtation
 {
     public class ProductService: IProductService
     {

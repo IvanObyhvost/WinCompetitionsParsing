@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MakeUpСompetition.DAL.Domain.Base
+namespace WinCompetitionsParsing.DAL.Domain.Base
 {
     class BaseEntity
     {

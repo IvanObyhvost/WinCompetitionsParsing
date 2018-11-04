@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MakeUpСompetition.DAL.Domain;
+using WinCompetitionsParsing.DAL.Domain;
 
-namespace MakeUpСompetition.DAL.Repositories.Abstract
+namespace WinCompetitionsParsing.DAL.Repositories.Abstract
 {
     public interface IProductRepository
     {

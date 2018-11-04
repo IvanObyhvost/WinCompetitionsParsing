@@ -4,7 +4,7 @@ using System.Net;
 using AngleSharp.Dom;
 using AngleSharp.Parser.Html;
 
-namespace MakeUpСompetition.Utils
+namespace WinCompetitionsParsing.Utils
 {
     public class ParsingSite
     {

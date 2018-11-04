@@ -1,9 +1,9 @@
-﻿<Window x:Class="MakeUpСompetition.MainWindow"
+﻿<Window x:Class="WinCompetitionsParsing.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MakeUpСompetition"
+        xmlns:local="clr-namespace:WinCompetitionsParsing"
         mc:Ignorable="d"
         Title="MainWindow" Height="540" Width="920" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Margin="0,0,0,0">

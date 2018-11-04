@@ -14,10 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MakeUpСompetition.BLL.Services.Abstract;
-using MakeUpСompetition.Utils;
+using WinCompetitionsParsing.BL.Services.Abstract;
+using WinCompetitionsParsing.Utils;
 
-namespace MakeUpСompetition.pages
+namespace WinCompetitionsParsing.pages
 {
     /// <summary>
     /// Interaction logic for LoadDBPage.xaml

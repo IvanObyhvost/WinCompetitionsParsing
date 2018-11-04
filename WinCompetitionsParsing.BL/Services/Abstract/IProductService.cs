@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MakeUpСompetition.BLL.Models;
+using WinCompetitionsParsing.BL.Models;
 
-namespace MakeUpСompetition.BLL.Services.Abstract
+namespace WinCompetitionsParsing.BL.Services.Abstract
 {
     public interface IProductService
     {

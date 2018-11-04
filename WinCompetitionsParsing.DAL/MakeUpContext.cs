@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using MakeUpСompetition.DAL.Domain;
+using WinCompetitionsParsing.DAL.Domain;
 
-namespace MakeUpСompetition.DAL
+namespace WinCompetitionsParsing.DAL
 {
     public class MakeUpContext
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MakeUpСompetition.DAL.Domain;
-using MakeUpСompetition.DAL.Repositories.Abstract;
+using WinCompetitionsParsing.DAL.Domain;
+using WinCompetitionsParsing.DAL.Repositories.Abstract;
 
-namespace MakeUpСompetition.DAL.Repositories.Implementation
+namespace WinCompetitionsParsing.DAL.Repositories.Implementation
 {
     public class ProductRepository: IProductRepository
     {

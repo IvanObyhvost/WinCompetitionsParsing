@@ -5,11 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using MakeUpСompetition;
-using MakeUpСompetition.BLL.Services.Abstract;
-using MakeUpСompetition.BLL.Services.Implemenrtation;
-using MakeUpСompetition.DAL.Repositories.Abstract;
-using MakeUpСompetition.DAL.Repositories.Implementation;
+using WinCompetitionsParsing;
+using WinCompetitionsParsing.BL.Services.Abstract;
+using WinCompetitionsParsing.BL.Services.Implemenrtation;
+using WinCompetitionsParsing.DAL.Repositories.Abstract;
+using WinCompetitionsParsing.DAL.Repositories.Implementation;
 using SimpleInjector;
 
 namespace WinCompetitionsParsing
