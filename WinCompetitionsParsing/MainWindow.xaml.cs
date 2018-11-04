@@ -28,6 +28,7 @@ namespace MakeUpСompetition
             _productService = productService;
             InitializeComponent();
             frPages.NavigationService.Navigate(new MakeUpPage(_productService));
+            SiteBar.Margin = new Thickness(0, btMakeUp.Margin.Top, 0, 0);
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -43,11 +44,13 @@ namespace MakeUpСompetition
         private void btMakeUp_Click(object sender, RoutedEventArgs e)
         {
             frPages.NavigationService.Navigate(new MakeUpPage(_productService));
+            SiteBar.Margin = new Thickness(0, btMakeUp.Margin.Top, 0, 0);
         }
 
         private void btLoadDB_Click(object sender, RoutedEventArgs e)
         {
             frPages.NavigationService.Navigate(new LoadDBPage(_productService));
+            SiteBar.Margin = new Thickness(0, btLoadDB.Margin.Top, 0, 0);
         }
     }
 }
