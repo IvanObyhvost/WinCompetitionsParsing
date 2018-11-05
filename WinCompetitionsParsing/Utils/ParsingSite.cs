@@ -2,7 +2,10 @@
 using System.Linq;
 using System.Net;
 using AngleSharp.Dom;
+using AngleSharp.Dom.Html;
+using AngleSharp.Extensions;
 using AngleSharp.Parser.Html;
+using WinCompetitionsParsing.BL.Models;
 
 namespace WinCompetitionsParsing.Utils
 {
@@ -24,7 +27,6 @@ namespace WinCompetitionsParsing.Utils
                 return webClient.DownloadString(uri);
             }
         }
-
         public IElement FindOneElement(string html, string find)
         {
             var document = parser.Parse(html);
@@ -44,6 +46,39 @@ namespace WinCompetitionsParsing.Utils
         {
             var document = parser.Parse(html);
             return document.QuerySelectorAll(find).Select(x => x.GetAttribute(attr));
+        }
+
+        public ProductModel GetDefaultInformationAboutProduct(string html)
+        {
+            var product = new ProductModel();
+            //проверить рабочий или нет
+            var price = FindOneElement(html, "span.product-item__price");
+            if (price != null)
+                product.IsWorking = true;
+
+            //найти категорию 
+            var category = FindOneElement(html, "div.bread-crumbs li:nth-child(2)");
+            if (category != null)
+                product.Category = FindOneElement(category.Html(), "span").Text();
+
+            //найти подкатигорию 
+            var subCategory = FindOneElement(html, "div.bread-crumbs li:nth-child(3)");
+            if (subCategory != null)
+                product.Category = FindOneElement(subCategory.Html(), "span").Text();
+
+            return product;
+        }
+
+        public bool CheckNotFindPageProduct(string html)
+        {
+            var product = FindOneElement(html, "div.page_not_found");
+            if (product != null)
+                return true;
+            return false;
+        }
+        public void CheckFindLink(string findLink)
+        {
+            
         }
     }
 }

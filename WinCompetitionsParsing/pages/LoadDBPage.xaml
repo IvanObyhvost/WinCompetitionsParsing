@@ -9,11 +9,11 @@
       Title="LoadDBPage" Width="810" Height="520">
 
     <Grid Background="White" Height="520" Width="810">
-        <ProgressBar HorizontalAlignment="Left" Height="20" Margin="30,90,0,0" VerticalAlignment="Top" Width="740"/>
+        <ProgressBar x:Name="pbStatus" HorizontalAlignment="Left" Height="20" Margin="30,90,0,0" VerticalAlignment="Top" Width="740"/>
         <Button x:Name="btUpdateDB" Content="Update" HorizontalAlignment="Left" Margin="680,115,0,0" VerticalAlignment="Top" Width="90" Background="#792c9b" Foreground="#FFFFFDFD" FontFamily="Century Gothic" FontSize="16" Height="35" Cursor="Hand" Click="btUpdateDB_Click"/>
-        <TextBox x:Name="tbStart" HorizontalAlignment="Left" Height="25" Margin="335,30,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="40" FontFamily="Century Gothic" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="tbStart" HorizontalAlignment="Left" Height="25" Margin="335,30,0,0" TextWrapping="Wrap" Text="498" VerticalAlignment="Top" Width="40" FontFamily="Century Gothic" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="NumberValidationTextBox"/>
         <TextBox x:Name="tbFinish" HorizontalAlignment="Left" Height="25" Margin="415,30,0,0" TextWrapping="Wrap" Text="510" VerticalAlignment="Top" Width="40" FontFamily="Century Gothic" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBlock HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="https://makeup.com.ua/product/" VerticalAlignment="Top" Height="25" Width="270" FontFamily="Century Gothic" FontSize="16"/>
+        <TextBlock x:Name="tbLinkSite" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="https://makeup.com.ua/product/" VerticalAlignment="Top" Height="25" Width="270" FontFamily="Century Gothic" FontSize="16"/>
         <TextBlock x:Name="tbInfo" HorizontalAlignment="Left" Margin="30,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="25" Width="740" FontFamily="Century Gothic" FontSize="16"/>
 
     </Grid>

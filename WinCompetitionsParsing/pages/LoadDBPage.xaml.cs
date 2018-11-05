@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WinCompetitionsParsing.BL.Models;
 using WinCompetitionsParsing.BL.Services.Abstract;
 using WinCompetitionsParsing.Utils;
 
@@ -27,17 +28,27 @@ namespace WinCompetitionsParsing.pages
         private readonly IProductService _productService;
         private ParsingSite parsingSite;
         private BackgroundWorker worker;
-
+        private QueryModel queryModel;
+        private List<ProductModel> productModels;
         public LoadDBPage(IProductService productService)
         {
             InitializeComponent();
             _productService = productService;
             parsingSite = new ParsingSite();
             worker = new BackgroundWorker();
+            queryModel = QueryModel.GetInstance();
             worker.WorkerReportsProgress = true;
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+
+            Init();
+        }
+
+        private void Init()
+        {
+            productModels = _productService.GetAll().ToList();
+            queryModel.MainLink = tbLinkSite.Text;
         }
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -45,6 +56,7 @@ namespace WinCompetitionsParsing.pages
             {
                 e.Cancel = true;
             }
+            LoadAllProducts(sender);
         }
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -53,25 +65,45 @@ namespace WinCompetitionsParsing.pages
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //pbStatus.Value = e.ProgressPercentage;
+            pbStatus.Value = e.ProgressPercentage;
         }
-        //private void worker_ChangeTextOnLabel(Label label, string text)
-        //{
-        //    label.Invoke((MethodInvoker)(() => label.Text = text));
-        //}
+        private void worker_ChangeTextOnLabel(Label label, string text)
+        {
+            //tbInfo.Invoke((MethodInvoker)(() => label.Text = text));
+        }
         
 
         private void btUpdateDB_Click(object sender, RoutedEventArgs e)
         {
-            //если нашел продукт - добавить
+            queryModel.StartProduct = Convert.ToInt32(tbStart.Text);
+            queryModel.EndProduct = Convert.ToInt32(tbFinish.Text);
             
-            //если не нашел, то пропустить
+            worker.RunWorkerAsync();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void LoadAllProducts(object sender)
+        {
+            for (int i = queryModel.StartProduct; i <= queryModel.EndProduct; i++)
+            {
+                ((BackgroundWorker)sender).ReportProgress(i);
+                queryModel.SelectProduct = i;
+                var html = parsingSite.GetHtml(queryModel.GetUriProduct());
+                var isDelete = parsingSite.CheckNotFindPageProduct(html);
+                if (!isDelete)
+                {
+                    var product = parsingSite.GetDefaultInformationAboutProduct(html);
+                    product.ProductCode = i;
+                    product.Uri = queryModel.GetUriProduct();
+                    productModels.Add(product);
+                }
+            }
+            
         }
     }
 }

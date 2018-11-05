@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,8 @@ using WinCompetitionsParsing.BL.Services.Implemenrtation;
 using WinCompetitionsParsing.DAL.Repositories.Abstract;
 using WinCompetitionsParsing.DAL.Repositories.Implementation;
 using SimpleInjector;
+using WinCompetitionsParsing.DAL;
+using WinCompetitionsParsing.DAL.Domain;
 
 namespace WinCompetitionsParsing
 {
@@ -38,6 +41,8 @@ namespace WinCompetitionsParsing
 
             // Register your windows and view models:
             container.Register<MainWindow>();
+            container.Register<Product>(Lifestyle.Scoped);
+            container.Register<DbContext, MakeUpContext>();
 
             container.Verify();
 
