@@ -14,6 +14,7 @@ namespace WinCompetitionsParsing.BL.Models
         public int StartProduct { get; set; }
         public int EndProduct { get; set; }
         public int SelectProduct { get; set; }
+        public int LastWorkProductCode { get; set; }
         public static QueryModel GetInstance()
         {
             return instance;

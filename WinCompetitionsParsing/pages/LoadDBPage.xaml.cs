@@ -41,14 +41,15 @@ namespace WinCompetitionsParsing.pages
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-
+            worker.WorkerSupportsCancellation = true;
             Init();
         }
 
         private void Init()
         {
-            productModels = _productService.GetAll().ToList();
+            productModels = new List<ProductModel>();//_productService.GetAll().ToList();
             queryModel.MainLink = tbLinkSite.Text;
+            btCancel.Visibility = Visibility.Hidden;
         }
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -56,11 +57,14 @@ namespace WinCompetitionsParsing.pages
             {
                 e.Cancel = true;
             }
-            LoadAllProducts(sender);
+            LoadAllProducts(sender, e);
         }
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //if (e.Cancelled) lbMessageInformation.Text = "Worker cancelled";
+            if (e.Cancelled) tbInfo.Text = "Worker cancelled";
+            btCancel.IsEnabled = true;
+            btCancel.Visibility = Visibility.Hidden;
+            btUpdateDB.Visibility = Visibility.Visible;
         }
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -77,7 +81,10 @@ namespace WinCompetitionsParsing.pages
         {
             queryModel.StartProduct = Convert.ToInt32(tbStart.Text);
             queryModel.EndProduct = Convert.ToInt32(tbFinish.Text);
-            
+            pbStatus.Value = 0;
+            pbStatus.Maximum = Math.Abs(queryModel.EndProduct);
+            btUpdateDB.Visibility = Visibility.Hidden;
+            btCancel.Visibility = Visibility.Visible;
             worker.RunWorkerAsync();
         }
 
@@ -87,23 +94,63 @@ namespace WinCompetitionsParsing.pages
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void LoadAllProducts(object sender)
+        private void LoadAllProducts(object sender, DoWorkEventArgs e)
         {
-            worker_ChangeTextOnTextBlock(tbInfo, "LoadAllProducts");
+            worker_ChangeTextOnTextBlock(tbInfo, "Load all products");
             for (int i = queryModel.StartProduct; i <= queryModel.EndProduct; i++)
             {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                worker_ChangeTextOnTextBlock(tbInfo, 
+                    string.Format("Load all products {0} : {1}", i, queryModel.EndProduct));
                 ((BackgroundWorker)sender).ReportProgress(i);
                 queryModel.SelectProduct = i;
-                var html = parsingSite.GetHtml(queryModel.GetUriProduct());
-                if (html != String.Empty)
+                var productModel = _productService.GetProduct(i);
+                if(productModel == null)
                 {
-                    var product = parsingSite.GetDefaultInformationAboutProduct(html);
-                    product.ProductCode = i;
-                    product.Uri = queryModel.GetUriProduct();
-                    productModels.Add(product);
+                    productModel = new ProductModel(i);
+                    productModel.Uri = queryModel.GetUriProduct();
+                    var html = parsingSite.GetHtml(queryModel.GetUriProduct());
+                    if (html != string.Empty)
+                    {
+                        parsingSite.GetDefaultInformationAboutProduct(html, productModel);
+                    }
+                    else
+                    {
+                        productModel.IsDelete = true;
+                    }
+                    _productService.AddProduct(productModel);
                 }
+                else
+                {
+                    //if (!productModel.IsDelete)
+                    //{
+                    //    var html = parsingSite.GetHtml(queryModel.GetUriProduct());
+                    //    if (html == string.Empty)
+                    //    {
+                    //        productModel.IsDelete = true;
+                    //        _productService.UpdateProduct(productModel);
+                    //    }
+                    //}
+                }
+                
             }
-            
+        }
+
+        private void LoadDBPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if(worker.IsBusy)
+                worker.CancelAsync();
+        }
+
+        private void btCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (worker.IsBusy)
+                worker.CancelAsync();
+            btCancel.IsEnabled = false;
         }
     }
 }

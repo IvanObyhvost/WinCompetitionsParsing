@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WinCompetitionsParsing.BL.Models;
 using WinCompetitionsParsing.BL.Services.Abstract;
 using WinCompetitionsParsing.pages;
 
@@ -23,10 +24,14 @@ namespace WinCompetitionsParsing
     public partial class MainWindow : Window
     {
         private readonly IProductService _productService;
+        private QueryModel queryModel;
+
         public MainWindow(IProductService productService)
         {
             _productService = productService;
+            queryModel = QueryModel.GetInstance();
             InitializeComponent();
+            queryModel.LastWorkProductCode = _productService.GetLastProductCodeIsWorking();
             frPages.NavigationService.Navigate(new MakeUpPage(_productService));
             SiteBar.Margin = new Thickness(0, btMakeUp.Margin.Top, 0, 0);
         }

@@ -17,6 +17,7 @@ namespace WinCompetitionsParsing.DAL.Domain
         private bool isWorking;
         private string category;
         private string subCategory;
+        private bool isDelete;
 
         public int Id { get; set; }
 
@@ -74,6 +75,15 @@ namespace WinCompetitionsParsing.DAL.Domain
             {
                 subCategory = value;
                 OnPropertyChanged("SubCategory");
+            }
+        }
+        public bool IsDelete
+        {
+            get { return isDelete; }
+            set
+            {
+                isDelete = value;
+                OnPropertyChanged("IsDelete");
             }
         }
         //public string

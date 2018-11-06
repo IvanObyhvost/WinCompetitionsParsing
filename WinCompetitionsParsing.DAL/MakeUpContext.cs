@@ -10,6 +10,12 @@ namespace WinCompetitionsParsing.DAL
     {
         public MakeUpContext() : base("DefaultConnection") { }
         public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<MakeUpContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 
 }

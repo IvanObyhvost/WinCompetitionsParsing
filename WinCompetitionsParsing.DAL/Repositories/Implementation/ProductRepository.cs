@@ -13,17 +13,32 @@ namespace WinCompetitionsParsing.DAL.Repositories.Implementation
         public ProductRepository()
         {
             db = new MakeUpContext();
-            db.Products.FirstOrDefaultAsync();
+            var k = db.Database.Connection.ConnectionString;
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return db.Products.ToList();
+            return db.Products;
+        }
+
+        public Product GetProduct(int productCode)
+        {
+            return db.Products.FirstOrDefault(x => x.ProductCode == productCode);
         }
 
         public void AddProduct(Product product)
         {
             db.Products.Add(product);
+            db.SaveChanges();
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            var entity = db.Products.Find(product.Id);
+            if (entity == null) return;
+            db.Entry(entity).CurrentValues.SetValues(product);
+            db.Entry(entity).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

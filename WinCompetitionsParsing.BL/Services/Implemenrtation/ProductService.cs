@@ -22,12 +22,31 @@ namespace WinCompetitionsParsing.BL.Services.Implemenrtation
         public IEnumerable<ProductModel> GetAll()
         {
             var products = _productRepository.GetAll();
-            return _mapper.Map<Product, ProductModel>(products);
+            return _mapper.Map<List<ProductModel>>(products);
+        }
+        public ProductModel GetProduct(int productCode)
+        {
+            var product = _productRepository.GetProduct(productCode);
+            return _mapper.Map<Product, ProductModel>(product);
         }
         public void AddProduct(ProductModel productModel)
         {
-            throw new NotImplementedException();
+            var product = _mapper.Map<ProductModel, Product>(productModel);
+            _productRepository.AddProduct(product);
         }
-        
+
+        public void UpdateProduct(ProductModel productModel)
+        {
+            var product = _mapper.Map<ProductModel, Product>(productModel);
+            _productRepository.UpdateProduct(product);
+        }
+
+        public int GetLastProductCodeIsWorking()
+        {
+            var productCode = _productRepository
+                                .GetAll()
+                                .FirstOrDefault(x => x.IsDelete == false && x.IsWorking == true);
+            return productCode != null ? productCode.ProductCode : 0;
+        }
     }
 }

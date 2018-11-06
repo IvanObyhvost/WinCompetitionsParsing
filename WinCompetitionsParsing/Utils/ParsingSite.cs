@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using AngleSharp.Dom;
 using AngleSharp.Dom.Html;
 using AngleSharp.Extensions;
@@ -13,6 +14,7 @@ namespace WinCompetitionsParsing.Utils
     public class ParsingSite
     {
         private string userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
+        private string language = "en-us;q=0.5,en;q=0.3";
         private HtmlParser parser;
 
         public ParsingSite()
@@ -27,6 +29,8 @@ namespace WinCompetitionsParsing.Utils
                 using (WebClient webClient = new WebClient())
                 {
                     webClient.Headers.Add(HttpRequestHeader.UserAgent, userAgent);
+                    webClient.Headers.Add(HttpRequestHeader.AcceptLanguage, language);
+                    webClient.Encoding = Encoding.UTF8;
                     var html = webClient.DownloadString(uri);
                     return html;
                 }
@@ -58,34 +62,32 @@ namespace WinCompetitionsParsing.Utils
             return document.QuerySelectorAll(find).Select(x => x.GetAttribute(attr));
         }
 
-        public ProductModel GetDefaultInformationAboutProduct(string html)
+        public void GetDefaultInformationAboutProduct(string html, ProductModel productModel)
         {
-            var product = new ProductModel();
+           
+
             //проверить рабочий или нет
             var price = FindOneElement(html, "span.product-item__price");
             if (price != null)
-                product.IsWorking = true;
+                productModel.IsWorking = true;
 
             //найти категорию 
             var category = FindOneElement(html, "div.bread-crumbs li:nth-child(2)");
             if (category != null)
-                product.Category = FindOneElement(category.Html(), "span").Text();
+                productModel.Category = FindOneElement(category.Html(), "span").Text();
 
             //найти подкатигорию 
             var subCategory = FindOneElement(html, "div.bread-crumbs li:nth-child(3)");
             if (subCategory != null)
-                product.Category = FindOneElement(subCategory.Html(), "span").Text();
+                productModel.SubCategory = FindOneElement(subCategory.Html(), "span").Text();
 
-            return product;
+            //найти имя 
+            var name = FindOneElement(html, ".product-item__name");
+            if (name != null)
+                productModel.Name = name.Text();
         }
 
-        public bool CheckNotFindPageProduct(string html)
-        {
-            var product = FindOneElement(html, "div.page_not_found");
-            if (product != null)
-                return true;
-            return false;
-        }
+        
         public void CheckFindLink(string findLink)
         {
             

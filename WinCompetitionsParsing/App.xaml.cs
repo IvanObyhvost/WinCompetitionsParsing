@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using WinCompetitionsParsing;
+﻿using System.Windows;
 using WinCompetitionsParsing.BL.Services.Abstract;
 using WinCompetitionsParsing.BL.Services.Implemenrtation;
 using WinCompetitionsParsing.DAL.Repositories.Abstract;
 using WinCompetitionsParsing.DAL.Repositories.Implementation;
 using SimpleInjector;
-using WinCompetitionsParsing.DAL;
 using WinCompetitionsParsing.DAL.Domain;
 using AutoMapper;
 using WinCompetitionsParsing.BL.Models;
@@ -40,16 +30,15 @@ namespace WinCompetitionsParsing
             var config = new AutoMapperConfiguration().Configure();
             //container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
             // Register your types, for instance:
-            container.Register<IProductRepository, ProductRepository>(Lifestyle.Singleton);
-            container.Register<IProductService, ProductService>(Lifestyle.Singleton);
+            container.Register<IProductRepository, ProductRepository>();
+            container.Register<IProductService, ProductService>();
+
+            container.RegisterSingleton<MapperConfiguration>(config);
+            container.Register<IMapper>(() => config.CreateMapper(container.GetInstance));
 
             // Register your windows and view models:
             container.Register<MainWindow>();
-            container.RegisterSingleton<MapperConfiguration>(config);
-            container.Register<IMapper>(() => config.CreateMapper(container.GetInstance));
-            //container.Register<Product>(Lifestyle.Scoped);
-            //container.Register<DbContext>(() => new MakeUpContext(), Lifestyle.Scoped);
-
+            
             container.Verify();
 
             return container;

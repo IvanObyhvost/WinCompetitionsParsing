@@ -60,6 +60,15 @@
     <Compile Include="Domain\Base\BaseEntity.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="MakeUpContext.cs" />
+    <Compile Include="Migrations\201811060928567_InitialCreate.cs" />
+    <Compile Include="Migrations\201811060928567_InitialCreate.Designer.cs">
+      <DependentUpon>201811060928567_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811061302460_InitialCreate1.cs" />
+    <Compile Include="Migrations\201811061302460_InitialCreate1.Designer.cs">
+      <DependentUpon>201811061302460_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Abstract\IProductRepository.cs" />
     <Compile Include="Repositories\Implementation\ProductRepository.cs" />
@@ -70,6 +79,14 @@
     <None Include="ParsingDB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811060928567_InitialCreate.resx">
+      <DependentUpon>201811060928567_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811061302460_InitialCreate1.resx">
+      <DependentUpon>201811061302460_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net45\System.Data.SQLite.Core.targets')" />

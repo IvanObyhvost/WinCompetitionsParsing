@@ -143,9 +143,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MakeUpDb.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="icons\autorenew.png" />
   </ItemGroup>
   <ItemGroup>
