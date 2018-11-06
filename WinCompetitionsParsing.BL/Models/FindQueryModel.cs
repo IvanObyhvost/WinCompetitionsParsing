@@ -8,5 +8,6 @@ namespace WinCompetitionsParsing.BL.Models
 {
     public class FindQueryModel
     {
+        public string FindLink { get; set; }
     }
 }
