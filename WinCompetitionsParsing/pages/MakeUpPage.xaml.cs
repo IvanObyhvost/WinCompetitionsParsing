@@ -23,8 +23,8 @@ namespace WinCompetitionsParsing.pages
     public partial class MakeUpPage : Page
     {
         private readonly IProductService _productService;
-
-        List<Grid> listGridMenu = new List<Grid>();
+        private string url = "https://makeup.com.ua/news/25343/"; //"Enter url find news here...";
+         List<Grid> listGridMenu = new List<Grid>();
         public MakeUpPage(IProductService productService)
         {
             InitializeComponent();
@@ -42,11 +42,11 @@ namespace WinCompetitionsParsing.pages
             }
             grSubMenu.Visibility = Visibility.Hidden;
             HideAllGridAndShowOneGrid();
-
+            tbSearch.Text = url;
             tbSearch.GotFocus += (sender, e) => { tbSearch.Text = string.Empty; };
             tbSearch.LostFocus += (sender, e) => {
                 if (string.IsNullOrWhiteSpace(tbSearch.Text))
-                    tbSearch.Text = "Enter url find news here...";
+                    tbSearch.Text = url;
             };
         }
 
