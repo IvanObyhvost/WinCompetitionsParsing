@@ -8,5 +8,6 @@ namespace WinCompetitionsParsing.BL.Services.Abstract
     public interface IProductService
     {
         IEnumerable<ProductModel> GetAll();
+        void AddProduct(ProductModel productModel);
     }
 }

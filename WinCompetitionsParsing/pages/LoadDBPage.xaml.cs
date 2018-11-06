@@ -67,9 +67,9 @@ namespace WinCompetitionsParsing.pages
         {
             pbStatus.Value = e.ProgressPercentage;
         }
-        private void worker_ChangeTextOnLabel(Label label, string text)
+        private void worker_ChangeTextOnTextBlock(TextBlock textBlock, string text)
         {
-            //tbInfo.Invoke((MethodInvoker)(() => label.Text = text));
+            textBlock.Dispatcher.Invoke((Action)(() => textBlock.Text = text));
         }
         
 
@@ -89,13 +89,13 @@ namespace WinCompetitionsParsing.pages
 
         private void LoadAllProducts(object sender)
         {
+            worker_ChangeTextOnTextBlock(tbInfo, "LoadAllProducts");
             for (int i = queryModel.StartProduct; i <= queryModel.EndProduct; i++)
             {
                 ((BackgroundWorker)sender).ReportProgress(i);
                 queryModel.SelectProduct = i;
                 var html = parsingSite.GetHtml(queryModel.GetUriProduct());
-                var isDelete = parsingSite.CheckNotFindPageProduct(html);
-                if (!isDelete)
+                if (html != String.Empty)
                 {
                     var product = parsingSite.GetDefaultInformationAboutProduct(html);
                     product.ProductCode = i;

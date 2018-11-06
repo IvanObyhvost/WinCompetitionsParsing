@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using AutoMapper;
 using WinCompetitionsParsing.BL.Models;
 using WinCompetitionsParsing.BL.Services.Abstract;
 using WinCompetitionsParsing.DAL.Domain;
@@ -11,31 +12,22 @@ namespace WinCompetitionsParsing.BL.Services.Implemenrtation
     public class ProductService: IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly IMapper _mapper;
+        public ProductService(IProductRepository productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
+            _mapper = mapper;
         }
 
         public IEnumerable<ProductModel> GetAll()
         {
             var products = _productRepository.GetAll();
-            return mapper(products);
+            return _mapper.Map<Product, ProductModel>(products);
         }
-
-        private IEnumerable<ProductModel> mapper(IEnumerable<Product> products)
+        public void AddProduct(ProductModel productModel)
         {
-            var productModels = new List<ProductModel>();
-            foreach (var product in products)
-            {
-                productModels.Add(new ProductModel()
-                {
-                    Name = product.Name,
-                    Uri = product.Uri,
-                    IsWorking = product.IsWorking
-                });
-            }
-            return productModels;
-            
+            throw new NotImplementedException();
         }
+        
     }
 }

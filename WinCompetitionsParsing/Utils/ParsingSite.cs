@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using AngleSharp.Dom;
@@ -21,11 +22,20 @@ namespace WinCompetitionsParsing.Utils
 
         public string GetHtml(string uri)
         {
-            using (WebClient webClient = new WebClient())
+            try
             {
-                webClient.Headers.Add(HttpRequestHeader.UserAgent, userAgent);
-                return webClient.DownloadString(uri);
+                using (WebClient webClient = new WebClient())
+                {
+                    webClient.Headers.Add(HttpRequestHeader.UserAgent, userAgent);
+                    var html = webClient.DownloadString(uri);
+                    return html;
+                }
             }
+            catch (Exception ex)
+            {
+                return String.Empty;
+            }
+           
         }
         public IElement FindOneElement(string html, string find)
         {
