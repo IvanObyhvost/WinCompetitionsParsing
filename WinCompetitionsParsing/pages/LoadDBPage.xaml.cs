@@ -50,6 +50,8 @@ namespace WinCompetitionsParsing.pages
             productModels = new List<ProductModel>();//_productService.GetAll().ToList();
             queryModel.MainLink = tbLinkSite.Text;
             btCancel.Visibility = Visibility.Hidden;
+            tbStart.Text = queryModel.StartProduct != 0 ? queryModel.StartProduct.ToString() : tbStart.Text;
+            tbFinish.Text = queryModel.EndProduct != 0 ? queryModel.EndProduct.ToString() : tbFinish.Text;
         }
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {

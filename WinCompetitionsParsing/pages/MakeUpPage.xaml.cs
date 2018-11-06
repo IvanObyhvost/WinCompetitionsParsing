@@ -42,6 +42,12 @@ namespace WinCompetitionsParsing.pages
             }
             grSubMenu.Visibility = Visibility.Hidden;
             HideAllGridAndShowOneGrid();
+
+            tbSearch.GotFocus += (sender, e) => { tbSearch.Text = string.Empty; };
+            tbSearch.LostFocus += (sender, e) => {
+                if (string.IsNullOrWhiteSpace(tbSearch.Text))
+                    tbSearch.Text = "Enter url find news here...";
+            };
         }
 
         private void btMakeup_Click(object sender, RoutedEventArgs e)
@@ -58,6 +64,11 @@ namespace WinCompetitionsParsing.pages
 
             if (nameGrid != "")
                 listGridMenu.First(x => x.Name == nameGrid).Visibility = Visibility.Visible;
+        }
+
+        private void btSearch_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
