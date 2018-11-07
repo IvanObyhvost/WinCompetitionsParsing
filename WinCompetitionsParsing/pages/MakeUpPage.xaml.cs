@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WinCompetitionsParsing.BL.Models;
 using WinCompetitionsParsing.BL.Services.Abstract;
 using WinCompetitionsParsing.Utils;
 
@@ -24,11 +25,15 @@ namespace WinCompetitionsParsing.pages
     {
         private readonly IProductService _productService;
         private string url = "https://makeup.com.ua/news/25343/"; //"Enter url find news here...";
-         List<Grid> listGridMenu = new List<Grid>();
+        List<Grid> listGridMenu = new List<Grid>();
+        private FindQueryModel findQueryModel;
+        private bool IsOpenSubMenu = false;
+
         public MakeUpPage(IProductService productService)
         {
             InitializeComponent();
             _productService = productService;
+            findQueryModel = FindQueryModel.GetInstance();
 
             Init();
         }
@@ -41,7 +46,6 @@ namespace WinCompetitionsParsing.pages
                 listGridMenu.Add(grid);
             }
             grSubMenu.Visibility = Visibility.Hidden;
-            HideAllGridAndShowOneGrid();
             tbSearch.Text = url;
             tbSearch.GotFocus += (sender, e) => { tbSearch.Text = string.Empty; };
             tbSearch.LostFocus += (sender, e) => {
@@ -50,25 +54,69 @@ namespace WinCompetitionsParsing.pages
             };
         }
 
-        private void btMakeup_Click(object sender, RoutedEventArgs e)
+        private void btCategory_Click(object sender, RoutedEventArgs e)
         {
-            HideAllGridAndShowOneGrid("grMakeup", true);
+            Button button = sender as Button;
+            var text = button.Content.ToString();
+            if (!IsOpenSubMenu)
+                IsOpenSubMenu = true;
+            else if (IsOpenSubMenu && findQueryModel.Category != text)
+                IsOpenSubMenu = true;
+            else
+                IsOpenSubMenu = false;
+            findQueryModel.Category = text;
+            SetBreadCrumbs();
+            HideAllGridAndShowOneGrid(button.Name);
         }
 
-        private void HideAllGridAndShowOneGrid(string nameGrid = "", bool showSubMenu = false)
+        private void HideAllGridAndShowOneGrid(string buttonName = "")
         {
-            if(showSubMenu)
+            if (IsOpenSubMenu)
                 grSubMenu.Visibility = Visibility.Visible;
+            else
+                grSubMenu.Visibility = Visibility.Hidden;
 
             listGridMenu.ForEach(g => g.Visibility = Visibility.Hidden);
-
-            if (nameGrid != "")
+            if(buttonName != string.Empty)
+            {
+                var nameGrid = buttonName.Replace("bt", "gr");
                 listGridMenu.First(x => x.Name == nameGrid).Visibility = Visibility.Visible;
+            }
+            
+        }
+
+        private void btSubCategory_Click(object sender, MouseButtonEventArgs e)
+        {
+            Label button = sender as Label;
+            var text = button.Content.ToString();
+            findQueryModel.SubCategory = text;
+            SetBreadCrumbs();
+            IsOpenSubMenu = false;
+            HideAllGridAndShowOneGrid();
         }
 
         private void btSearch_Click(object sender, RoutedEventArgs e)
         {
+            findQueryModel.FindLink = tbSearch.Text;
+        }
 
+        private void lbSubCategory_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Label label = sender as Label;
+            label.Foreground = new SolidColorBrush(Color.FromRgb(121, 44, 155));
+        }
+
+        private void lbSubCategory_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Label label = sender as Label;
+            label.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+        }
+
+        private void SetBreadCrumbs()
+        {
+            var category = findQueryModel.Category != null ? " > " + findQueryModel.Category: string.Empty;
+            var subCategory = findQueryModel.SubCategory != null ? " > " + findQueryModel.SubCategory : string.Empty;
+            lbBreadCrumbs.Content = string.Format("MAKEUP{0}{1}", category, subCategory);
         }
     }
 }
