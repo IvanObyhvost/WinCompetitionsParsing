@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Domain\Base\BaseEntity.cs" />
     <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\Subcategory.cs" />
     <Compile Include="MakeUpContext.cs" />
     <Compile Include="Migrations\201811060928567_InitialCreate.cs" />
     <Compile Include="Migrations\201811060928567_InitialCreate.Designer.cs">
@@ -68,10 +69,20 @@
     <Compile Include="Migrations\201811061302460_InitialCreate1.Designer.cs">
       <DependentUpon>201811061302460_InitialCreate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811080851565_addCategory.cs" />
+    <Compile Include="Migrations\201811080851565_addCategory.Designer.cs">
+      <DependentUpon>201811080851565_addCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811080941378_adk.cs" />
+    <Compile Include="Migrations\201811080941378_adk.Designer.cs">
+      <DependentUpon>201811080941378_adk.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Abstract\IProductRepository.cs" />
+    <Compile Include="Repositories\Abstract\ISubcategoryRepository.cs" />
     <Compile Include="Repositories\Implementation\ProductRepository.cs" />
+    <Compile Include="Repositories\Implementation\SubcategoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -86,6 +97,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811061302460_InitialCreate1.resx">
       <DependentUpon>201811061302460_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080851565_addCategory.resx">
+      <DependentUpon>201811080851565_addCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080941378_adk.resx">
+      <DependentUpon>201811080941378_adk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,7 @@ namespace WinCompetitionsParsing.DAL
     {
         public MakeUpContext() : base("DefaultConnection") { }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

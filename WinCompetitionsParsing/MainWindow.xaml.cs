@@ -24,15 +24,17 @@ namespace WinCompetitionsParsing
     public partial class MainWindow : Window
     {
         private readonly IProductService _productService;
+        private readonly ISubcategoryService _subcategoryService;
         private QueryModel queryModel;
 
-        public MainWindow(IProductService productService)
+        public MainWindow(IProductService productService, ISubcategoryService subcategoryService)
         {
             _productService = productService;
+            _subcategoryService = subcategoryService;
             queryModel = QueryModel.GetInstance();
             InitializeComponent();
             queryModel.LastWorkProductCode = _productService.GetLastProductCodeIsWorking();
-            frPages.NavigationService.Navigate(new MakeUpPage(_productService));
+            frPages.NavigationService.Navigate(new MakeUpPage(_productService, _subcategoryService));
             SiteBar.Margin = new Thickness(0, btMakeUp.Margin.Top, 0, 0);
         }
 
@@ -48,7 +50,7 @@ namespace WinCompetitionsParsing
 
         private void btMakeUp_Click(object sender, RoutedEventArgs e)
         {
-            frPages.NavigationService.Navigate(new MakeUpPage(_productService));
+            frPages.NavigationService.Navigate(new MakeUpPage(_productService, _subcategoryService));
             SiteBar.Margin = new Thickness(0, btMakeUp.Margin.Top, 0, 0);
         }
 

@@ -13,7 +13,6 @@ namespace WinCompetitionsParsing.DAL.Repositories.Implementation
         public ProductRepository()
         {
             db = new MakeUpContext();
-            var k = db.Database.Connection.ConnectionString;
         }
 
         public IEnumerable<Product> GetAll()

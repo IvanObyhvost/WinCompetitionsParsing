@@ -32,6 +32,8 @@ namespace WinCompetitionsParsing
             // Register your types, for instance:
             container.Register<IProductRepository, ProductRepository>();
             container.Register<IProductService, ProductService>();
+            container.Register<ISubcategoryRepository, SubcategoryRepository>();
+            container.Register<ISubcategoryService, SubcategoryService>();
 
             container.RegisterSingleton<MapperConfiguration>(config);
             container.Register<IMapper>(() => config.CreateMapper(container.GetInstance));
@@ -52,6 +54,7 @@ namespace WinCompetitionsParsing
         protected override void Configure()
         {
             CreateMap<ProductModel, Product>().ReverseMap();
+            CreateMap<SubcategoryModel, Subcategory>().ReverseMap();
         }
     }
 

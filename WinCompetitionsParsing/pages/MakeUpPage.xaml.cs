@@ -24,27 +24,55 @@ namespace WinCompetitionsParsing.pages
     public partial class MakeUpPage : Page
     {
         private readonly IProductService _productService;
+        private readonly ISubcategoryService _subcategoryService;
         private string url = "https://makeup.com.ua/news/25343/"; //"Enter url find news here...";
         List<Grid> listGridMenu = new List<Grid>();
         private FindQueryModel findQueryModel;
         private bool IsOpenSubMenu = false;
 
-        public MakeUpPage(IProductService productService)
+        public MakeUpPage(IProductService productService, ISubcategoryService subcategoryService)
         {
             InitializeComponent();
             _productService = productService;
+            _subcategoryService = subcategoryService;
+
             findQueryModel = FindQueryModel.GetInstance();
 
+            InitGrids();
             Init();
+        }
+
+        private void InitGrids()
+        {
+            var uiBulder = new UIBuilder();
+            var allButtons = grMenu.Children.OfType<Button>();
+            foreach(var button in allButtons)
+            {
+                var content = button.Content.ToString();
+                var categoryModel = new CategoryModel();
+                categoryModel.Name = content;
+                categoryModel.Subcategories = _subcategoryService.GetSubcategories(categoryModel.Name).ToList();
+                var maxCol = categoryModel.Subcategories.Max(x => x.Col) +1;
+                var maxRow = categoryModel.Subcategories.Max(x => x.Row) + 1;
+                categoryModel.DrowGrid = new DrowGrid(button.Name.Replace("bt", "gr"), maxRow, maxCol);
+                var grid = uiBulder.BuildSubMenu(categoryModel);
+
+                listGridMenu.Add(grid);
+                grSubMenu.Children.Add(grid);
+
+                var allLabel = grid.Children.OfType<Label>();
+                foreach (var label in allLabel)
+                {
+                    label.MouseEnter += lbSubCategory_MouseEnter;
+                    label.MouseLeave += lbSubCategory_MouseLeave;
+                    label.MouseLeftButtonUp += btSubCategory_Click;
+                }
+
+            }
         }
 
         private void Init()
         {
-            var allGrid = grSubMenu.Children.OfType<Grid>();
-            foreach (var grid in allGrid)
-            {
-                listGridMenu.Add(grid);
-            }
             grSubMenu.Visibility = Visibility.Hidden;
             tbSearch.Text = url;
             tbSearch.GotFocus += (sender, e) => { tbSearch.Text = string.Empty; };
@@ -63,7 +91,11 @@ namespace WinCompetitionsParsing.pages
             else if (IsOpenSubMenu && findQueryModel.Category != text)
                 IsOpenSubMenu = true;
             else
+            {
                 IsOpenSubMenu = false;
+                findQueryModel.SubCategory = null;
+            }
+                
             findQueryModel.Category = text;
             SetBreadCrumbs();
             HideAllGridAndShowOneGrid(button.Name);
@@ -80,7 +112,9 @@ namespace WinCompetitionsParsing.pages
             if(buttonName != string.Empty)
             {
                 var nameGrid = buttonName.Replace("bt", "gr");
-                listGridMenu.First(x => x.Name == nameGrid).Visibility = Visibility.Visible;
+                var selectGrid = listGridMenu.First(x => x.Name == nameGrid);
+                selectGrid.Visibility = Visibility.Visible;
+                grSubMenu.Height = selectGrid.Height;
             }
             
         }
