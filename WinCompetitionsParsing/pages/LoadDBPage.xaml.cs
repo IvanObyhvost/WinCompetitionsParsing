@@ -52,6 +52,8 @@ namespace WinCompetitionsParsing.pages
             btCancel.Visibility = Visibility.Hidden;
             tbStart.Text = queryModel.StartProduct != 0 ? queryModel.StartProduct.ToString() : tbStart.Text;
             tbFinish.Text = queryModel.EndProduct != 0 ? queryModel.EndProduct.ToString() : tbFinish.Text;
+            tbTotalLoadedProducts.Text = _productService.GetTotalProducts().ToString();
+            tbTotalWorkProducts.Text = _productService.GetWorkProducts().ToString();
         }
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {

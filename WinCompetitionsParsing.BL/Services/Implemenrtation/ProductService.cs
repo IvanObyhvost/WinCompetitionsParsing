@@ -48,5 +48,15 @@ namespace WinCompetitionsParsing.BL.Services.Implemenrtation
                                 .FirstOrDefault(x => x.IsDelete == false && x.IsWorking == true);
             return productCode != null ? productCode.ProductCode : 0;
         }
+
+        public int GetTotalProducts()
+        {
+            return _productRepository.GetAll().Max(x => x.ProductCode);
+        }
+
+        public int GetWorkProducts()
+        {
+            return _productRepository.GetAll().Where(x => x.IsWorking).Max(x => x.ProductCode);
+        }
     }
 }

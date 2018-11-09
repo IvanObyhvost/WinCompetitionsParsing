@@ -12,6 +12,7 @@ namespace WinCompetitionsParsing.BL.Services.Abstract
         int GetLastProductCodeIsWorking();
         void AddProduct(ProductModel productModel);
         void UpdateProduct(ProductModel productModel);
-        
+        int GetTotalProducts();
+        int GetWorkProducts();
     }
 }

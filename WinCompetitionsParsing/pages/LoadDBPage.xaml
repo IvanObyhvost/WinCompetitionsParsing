@@ -16,6 +16,10 @@
         <TextBlock x:Name="tbLinkSite" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="https://makeup.com.ua/product/" VerticalAlignment="Top" Height="25" Width="270" FontFamily="Century Gothic" FontSize="16"/>
         <TextBlock x:Name="tbInfo" HorizontalAlignment="Left" Margin="30,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="25" Width="740" FontFamily="Century Gothic" FontSize="16"/>
         <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="680,115,0,0" VerticalAlignment="Top" Width="90" Background="#FF8F8F8F" Foreground="#FFFFFDFD" FontFamily="Century Gothic" FontSize="16" Height="35" Cursor="Hand" Click="btCancel_Click"/>
+        <TextBlock x:Name="tbTotalLoadedProducts" HorizontalAlignment="Left" Margin="183,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="20" Width="37" FontFamily="Century Gothic"/>
+        <Label Content="Count loaded Products: " HorizontalAlignment="Left" Margin="30,110,0,0" VerticalAlignment="Top" FontFamily="Century Gothic"/>
+        <TextBlock x:Name="tbTotalWorkProducts" HorizontalAlignment="Left" Margin="408,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="20" Width="37" FontFamily="Century Gothic"/>
+        <Label Content="Count work Products: " HorizontalAlignment="Left" Margin="255,110,0,0" VerticalAlignment="Top" FontFamily="Century Gothic"/>
 
     </Grid>
 </Page>
