@@ -9,6 +9,7 @@ namespace WinCompetitionsParsing.BL.Services.Abstract
 {
     public interface ISubcategoryService
     {
+        IEnumerable<SubcategoryModel> GetAllSubcategories();
         IEnumerable<SubcategoryModel> GetSubcategories(string nameCategory);
     }
 }

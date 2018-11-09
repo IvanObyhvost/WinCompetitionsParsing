@@ -10,7 +10,6 @@ namespace WinCompetitionsParsing.DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WinCompetitionsParsing.DAL.MakeUpContext";
         }
 
         protected override void Seed(WinCompetitionsParsing.DAL.MakeUpContext context)

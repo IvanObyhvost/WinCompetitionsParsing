@@ -9,90 +9,102 @@ using WinCompetitionsParsing.DAL.Domain.Base;
 
 namespace WinCompetitionsParsing.DAL.Domain
 {
-    public class Product : INotifyPropertyChanged
+    public class Product
     {
-        private int productCode;
-        private string name;
-        private string uri;
-        private bool isWorking;
-        private string category;
-        private string subCategory;
-        private bool isDelete;
-
         public int Id { get; set; }
+        public int ProductCode { get; set; }
+        public string Name { get; set; }
+        public string Uri { get; set; }
+        public bool IsWorking { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
+        public bool IsDelete { get; set; }
 
-        public int ProductCode
-        {
-            get { return productCode;  }
-            set
-            {
-                productCode = value;
-                OnPropertyChanged("ProductCode");
-            }
-        }
-
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-
-        public string Uri
-        {
-            get { return uri; }
-            set
-            {
-                uri = value;
-                OnPropertyChanged("Uri");
-            }
-        }
-        public bool IsWorking
-        {
-            get { return isWorking; }
-            set
-            {
-                isWorking = value;
-                OnPropertyChanged("IsWorking");
-            }
-        }
-        public string Category
-        {
-            get { return category; }
-            set
-            {
-                category = value;
-                OnPropertyChanged("Category");
-            }
-        }
-        public string SubCategory
-        {
-            get { return subCategory; }
-            set
-            {
-                subCategory = value;
-                OnPropertyChanged("SubCategory");
-            }
-        }
-        public bool IsDelete
-        {
-            get { return isDelete; }
-            set
-            {
-                isDelete = value;
-                OnPropertyChanged("IsDelete");
-            }
-        }
-        //public string
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
+    //public class Product : INotifyPropertyChanged
+    //{
+    //    private int productCode;
+    //    private string name;
+    //    private string uri;
+    //    private bool isWorking;
+    //    private string category;
+    //    private string subCategory;
+    //    private bool isDelete;
+
+    //    public int Id { get; set; }
+
+    //    public int ProductCode
+    //    {
+    //        get { return productCode;  }
+    //        set
+    //        {
+    //            productCode = value;
+    //            OnPropertyChanged("ProductCode");
+    //        }
+    //    }
+
+    //    public string Name
+    //    {
+    //        get { return name; }
+    //        set
+    //        {
+    //            name = value;
+    //            OnPropertyChanged("Name");
+    //        }
+    //    }
+
+    //    public string Uri
+    //    {
+    //        get { return uri; }
+    //        set
+    //        {
+    //            uri = value;
+    //            OnPropertyChanged("Uri");
+    //        }
+    //    }
+    //    public bool IsWorking
+    //    {
+    //        get { return isWorking; }
+    //        set
+    //        {
+    //            isWorking = value;
+    //            OnPropertyChanged("IsWorking");
+    //        }
+    //    }
+    //    public string Category
+    //    {
+    //        get { return category; }
+    //        set
+    //        {
+    //            category = value;
+    //            OnPropertyChanged("Category");
+    //        }
+    //    }
+    //    public string SubCategory
+    //    {
+    //        get { return subCategory; }
+    //        set
+    //        {
+    //            subCategory = value;
+    //            OnPropertyChanged("SubCategory");
+    //        }
+    //    }
+    //    public bool IsDelete
+    //    {
+    //        get { return isDelete; }
+    //        set
+    //        {
+    //            isDelete = value;
+    //            OnPropertyChanged("IsDelete");
+    //        }
+    //    }
+    //    //public string
+    //    public event PropertyChangedEventHandler PropertyChanged;
+
+    //    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    //    {
+    //        var handler = PropertyChanged;
+    //        if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+    //    }
+    //}
 }

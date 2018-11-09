@@ -17,6 +17,12 @@ namespace WinCompetitionsParsing.BL.Services.Implemenrtation
             _mapper = mapper;
         }
 
+        public IEnumerable<SubcategoryModel> GetAllSubcategories()
+        {
+            var subcategory = _subcategoryRepository.GetAllSubcategories();
+            return _mapper.Map<List<SubcategoryModel>>(subcategory);
+        }
+
         public IEnumerable<SubcategoryModel> GetSubcategories(string nameCategory)
         {
             var subcategory = _subcategoryRepository.GetSubcategories(nameCategory);
