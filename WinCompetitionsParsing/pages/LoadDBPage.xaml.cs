@@ -20,9 +20,6 @@ using WinCompetitionsParsing.Utils;
 
 namespace WinCompetitionsParsing.pages
 {
-    /// <summary>
-    /// Interaction logic for LoadDBPage.xaml
-    /// </summary>
     public partial class LoadDBPage : Page
     {
         private readonly IProductService _productService;

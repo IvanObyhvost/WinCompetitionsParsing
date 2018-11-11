@@ -58,5 +58,20 @@ namespace WinCompetitionsParsing.BL.Services.Implemenrtation
         {
             return _productRepository.GetAll().Where(x => x.IsWorking).Max(x => x.ProductCode);
         }
+
+        public IEnumerable<ProductModel> GetProductsByCategoryAndSubcategory(string category, string subcategore = "")
+        {
+            var products = new List<Product>();
+            if (subcategore == string.Empty)
+                products = _productRepository
+                            .GetAll()
+                            .Where(x => !x.IsDelete && x.IsWorking && x.Category == category && x.SubCategory == subcategore)
+                            .ToList();
+            else
+                products = _productRepository.GetAll()
+                            .Where(x => !x.IsDelete && x.IsWorking && x.Category == category)
+                            .ToList();
+            return _mapper.Map<List<ProductModel>>(products);
+        }
     }
 }

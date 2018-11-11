@@ -88,9 +88,14 @@ namespace WinCompetitionsParsing.Utils
         }
 
         
-        public void CheckFindLink(string findLink)
+        public bool CheckFindLink(string uri, string findLink)
         {
-            
+            var html = GetHtml(uri);
+            if (html == string.Empty) return false;
+            var link = FindOneElement(html, "div.product-info__description a", "href");
+            if (link == null) return false;
+            if (link == findLink) return true;
+            return false;
         }
     }
 }

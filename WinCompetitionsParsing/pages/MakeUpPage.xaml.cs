@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,6 @@ using WinCompetitionsParsing.Utils;
 
 namespace WinCompetitionsParsing.pages
 {
-    /// <summary>
-    /// Interaction logic for MakeUpPage.xaml
-    /// </summary>
     public partial class MakeUpPage : Page
     {
         private readonly IProductService _productService;
@@ -28,6 +26,7 @@ namespace WinCompetitionsParsing.pages
         private string url = "https://makeup.com.ua/news/25343/"; //"Enter url find news here...";
         List<Grid> listGridMenu = new List<Grid>();
         private FindQueryModel findQueryModel;
+        private BackgroundWorker worker;
         private bool IsOpenSubMenu = false;
 
         public MakeUpPage(IProductService productService, ISubcategoryService subcategoryService)
@@ -35,8 +34,13 @@ namespace WinCompetitionsParsing.pages
             InitializeComponent();
             _productService = productService;
             _subcategoryService = subcategoryService;
-
             findQueryModel = FindQueryModel.GetInstance();
+            worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += worker_DoWork;
+            worker.ProgressChanged += worker_ProgressChanged;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.WorkerSupportsCancellation = true;
 
             InitGrids();
             Init();
@@ -74,6 +78,7 @@ namespace WinCompetitionsParsing.pages
         private void Init()
         {
             grSubMenu.Visibility = Visibility.Hidden;
+            grFindLink.Visibility = Visibility.Hidden;
             tbSearch.Text = url;
             tbSearch.GotFocus += (sender, e) => { tbSearch.Text = string.Empty; };
             tbSearch.LostFocus += (sender, e) => {
@@ -81,6 +86,7 @@ namespace WinCompetitionsParsing.pages
                     tbSearch.Text = url;
             };
         }
+
 
         private void btCategory_Click(object sender, RoutedEventArgs e)
         {
@@ -132,6 +138,7 @@ namespace WinCompetitionsParsing.pages
         private void btSearch_Click(object sender, RoutedEventArgs e)
         {
             findQueryModel.FindLink = tbSearch.Text;
+            dgResult.Items.Clear();
         }
 
         private void lbSubCategory_MouseEnter(object sender, MouseEventArgs e)
@@ -151,6 +158,51 @@ namespace WinCompetitionsParsing.pages
             var category = findQueryModel.Category != null ? " > " + findQueryModel.Category: string.Empty;
             var subCategory = findQueryModel.SubCategory != null ? " > " + findQueryModel.SubCategory : string.Empty;
             lbBreadCrumbs.Content = string.Format("MAKEUP{0}{1}", category, subCategory);
+        }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (worker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
+            CheckFindLink(sender, e);
+        }
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled) tbInfo.Text = "Worker cancelled";
+            grFindLink.Visibility = Visibility.Hidden;
+        }
+
+        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbStatus.Value = e.ProgressPercentage;
+        }
+        private void worker_ChangeTextOnTextBlock(TextBlock textBlock, string text)
+        {
+            textBlock.Dispatcher.Invoke((Action)(() => textBlock.Text = text));
+        }
+        private void CheckFindLink(object sender, DoWorkEventArgs e)
+        {
+            var parsingSite = new ParsingSite();
+            string link = tbSearch.Text;
+            var products = _productService.GetProductsByCategoryAndSubcategory(findQueryModel.Category, findQueryModel.SubCategory).ToList();
+            for(int i = 0; i < products.Count(); i++)
+            {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                worker_ChangeTextOnTextBlock(tbInfo, string.Format("Find link {0} : {1}", i, products.Count()+1));
+                ((BackgroundWorker)sender).ReportProgress(i);
+                var IsFind = parsingSite.CheckFindLink(products[i].Uri, link);
+                if (IsFind)
+                {
+                    dgResult.Items.Add(new ProductGridModel(products[i].Name, products[i].Uri));
+                }
+                    
+            }
         }
     }
 }

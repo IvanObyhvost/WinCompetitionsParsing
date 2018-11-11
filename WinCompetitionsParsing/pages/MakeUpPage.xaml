@@ -8,66 +8,31 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MakeUpPage" Height="520" Width="810">
 
-    <Grid Height="520" Background="White">
+    <Grid Background="White" Margin="0,0,0,120" Height="400">
         <Image HorizontalAlignment="Stretch" Height="95" Margin="295,0" VerticalAlignment="Top" Width="220" Source="/WinCompetitionsParsing;component/images/logo.png"/>
         <Grid x:Name="grMenu" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="810" Margin="0, 100, 0, 0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-            <Button x:Name="btMakeup" Content="Макияж" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="0" Click="btCategory_Click"/>
-            <!--<Button x:Name="btNails" Content="Ногти" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="70,0,0,0" Click="btCategory_Click"/>-->
             <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="0 1 0 1" Width="810"/>
+            <Button x:Name="btPerfumery" Content="Парфюмерия" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="10,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btMakeup" Content="Макияж" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="120,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btNails" Content="Ногти" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="195,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btHair" Content="Волосы" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="265,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btFace" Content="Лицо" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="335,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btBodyAndBath" Content="Тело и ванна" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="400,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btForMen" Content="Мужчинам" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="500,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btAccessories" Content="Аксессуары" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="595,0,0,0" Click="btCategory_Click"/>
+            <Button x:Name="btHealthCare" Content="Health &amp; Care" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Height="30" FontFamily="Century Gothic" BorderBrush="{x:Null}" Background="{x:Null}" Cursor="Hand" Margin="695,0,0,0" Click="btCategory_Click"/>
         </Grid>
-        <Grid x:Name="grMain" HorizontalAlignment="Left" Height="390" Margin="0,130,0,0" VerticalAlignment="Top" Width="810">
+        <Grid x:Name="grMain" HorizontalAlignment="Left" Height="270" Margin="0,130,0,0" VerticalAlignment="Top" Width="810">
             <Label x:Name="lbBreadCrumbs" Content="MAKEUP" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+            <Grid x:Name="grFindLink" HorizontalAlignment="Left" Height="239" Margin="0,31,0,-10" VerticalAlignment="Top" Width="810">
+                <TextBlock x:Name="tbInfo" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="25" Width="810" FontFamily="Century Gothic" FontSize="16"/>
+                <ProgressBar x:Name="pbStatus" HorizontalAlignment="Left" Height="20" Margin="10,25,0,0" VerticalAlignment="Top" Width="790"/>
+                <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="740,59,0,0" VerticalAlignment="Top" Width="60" Background="#FF8F8F8F" Foreground="#FFFFFDFD" FontFamily="Century Gothic" Height="20" Cursor="Hand" Click="btCancel_Click"/>
+                <DataGrid x:Name="dgResult" HorizontalAlignment="Left" Height="100" Margin="175,109,0,0" VerticalAlignment="Top" Width="425"/>
+            </Grid>
 
-            <Grid x:Name="grSubMenu"  Width="810" Height="120" Background="#FFF3F3F3" VerticalAlignment="Top" >
+            <Grid x:Name="grSubMenu"  Width="810" Height="120" Background="#FFF3F3F3" VerticalAlignment="Top" Visibility="Hidden">
                 <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="0 0 0 1" Margin="0"/>
-                <!--<Grid x:Name="grMakeup"  Visibility="Hidden">
-                    <Label  Content="Глаза" FontFamily="Century Gothic" FontSize="12" Margin="60,5,705,110" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave" MouseLeftButtonUp="btSubCategory_Click"/>
-                    <Label  Content="Брови" FontFamily="Century Gothic" FontSize="12" Margin="60,30,705,85" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Губы" FontFamily="Century Gothic" FontSize="12" Margin="60,55,710,60" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-
-                    <Label  Content="Лицо" FontFamily="Century Gothic" FontSize="12" Margin="340,5,355,110" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Кисти" FontFamily="Century Gothic" FontSize="12" Margin="340,30,380,85" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Демакияж" FontFamily="Century Gothic" FontSize="12" Margin="340,55,395,60" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-
-                    <Label  Content="Миниатюры" FontFamily="Century Gothic" FontSize="12" Margin="600,5,125,110" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Палетки" FontFamily="Century Gothic" FontSize="12" Margin="600,30,150,85" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                </Grid>
-                <Grid x:Name="grNails" Visibility="Hidden">
-                    <Label  Content="Лаки для ногтей" FontFamily="Century Gothic" FontSize="12" Margin="60,5,645,110" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Гель-лаки" FontFamily="Century Gothic" FontSize="12" Margin="60,30,690,85" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Декор ногтей" FontFamily="Century Gothic" FontSize="12" Margin="60,55,660,60" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Накладные ногти" FontFamily="Century Gothic" FontSize="12" Margin="60,80,635,35" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Гель для ногтей" FontFamily="Century Gothic" FontSize="12" Margin="60,105,645,10" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-
-                    <Label  Content="Основы под лак" FontFamily="Century Gothic" FontSize="12" Margin="305,5,390,110" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Закрепители" FontFamily="Century Gothic" FontSize="12" Margin="305,30,415,85" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Сушки" FontFamily="Century Gothic" FontSize="12" Margin="305,55,455,60" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Жидкости для снятия лака" FontFamily="Century Gothic" FontSize="12" Margin="305,80,340,35" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-
-                    <Label  Content="Уход за кутикулой" FontFamily="Century Gothic" FontSize="12" Margin="550,5,140,110" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Карандаш для ногтей" FontFamily="Century Gothic" FontSize="12" Margin="550,30,120,85" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Лечение" FontFamily="Century Gothic" FontSize="12" Margin="550,55,195,60" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Инструменты для маникюра и педикюра" FontFamily="Century Gothic" FontSize="12" Margin="550,80,0,35" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label  Content="Спецсредства" FontFamily="Century Gothic" FontSize="12" Margin="550,105,160,10" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                </Grid>
-                <Grid ShowGridLines="True">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Content="Лаки для ногтей" FontFamily="Century Gothic" FontSize="12" Margin="40,0,0,0" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave" RenderTransformOrigin="0.28,0.445" HorizontalAlignment="Left" Height="25" VerticalAlignment="Center"/>
-                    <Label Grid.Column="0" Grid.Row="1" Content="Гель-лаки" FontFamily="Century Gothic" FontSize="12" Margin="60,30,690,85" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label Grid.Column="0" Grid.Row="2" Content="Декор ногтей" FontFamily="Century Gothic" FontSize="12" Margin="60,55,660,60" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave"/>
-                    <Label Grid.Column="1" Grid.Row="0" Content="Накладные ногти" FontFamily="Century Gothic" FontSize="12" Margin="20,0,0,0" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave" Height="25" Width="115" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Grid.Row="1" Content="Гель для ногтей" FontFamily="Century Gothic" FontSize="12" Margin="20,0,0,0" Cursor="Hand" MouseEnter="lbSubCategory_MouseEnter" MouseLeave="lbSubCategory_MouseLeave" Height="25" Width="115" HorizontalAlignment="Left"/>
-
-                </Grid>-->
             </Grid>
 
         </Grid>
