@@ -194,7 +194,7 @@ namespace WinCompetitionsParsing.pages
                     e.Cancel = true;
                     break;
                 }
-                worker_ChangeTextOnTextBlock(tbInfo, string.Format("Find link {0} : {1}", i, products.Count()+1));
+                worker_ChangeTextOnTextBlock(tbInfo, string.Format("Find link {0} : {1}", i, products.Count()));
                 ((BackgroundWorker)sender).ReportProgress(i);
                 var IsFind = parsingSite.CheckFindLink(products[i].Uri, link);
                 if (IsFind)
