@@ -204,5 +204,18 @@ namespace WinCompetitionsParsing.pages
                     
             }
         }
+
+        private void MakeUpPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (worker.IsBusy)
+                worker.CancelAsync();
+        }
+
+        private void btCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (worker.IsBusy)
+                worker.CancelAsync();
+            btCancel.IsEnabled = false;
+        }
     }
 }
